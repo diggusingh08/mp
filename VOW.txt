@@ -1,0 +1,49 @@
+MOV SI,3000H
+MOV [SI],'a'
+INC SI
+MOV [SI],'b'
+INC SI
+MOV [SI],'A'
+INC SI
+MOV [SI],'b'
+INC SI
+MOV [SI],'Z'
+INC SI
+MOV [SI],'$'  
+
+MOV SI, 3000H      
+MOV CL, 00H        
+
+NEXT_CHAR:
+    MOV AL, [SI]  
+    CMP AL, '$'    
+    JE DONE       
+
+   
+    CMP AL, 'a'
+    JB CHECK       
+          
+    SUB AL, 20H   
+CHECK:
+    CMP AL, 'A'
+    JE INC_COUNT
+    CMP AL, 'E'
+    JE INC_COUNT
+    CMP AL, 'I'
+    JE INC_COUNT
+    CMP AL, 'O'
+    JE INC_COUNT
+    CMP AL, 'U'
+    JE INC_COUNT
+    JMP NEXT      
+
+INC_COUNT:
+    INC CL         
+
+NEXT:
+    INC SI         
+    JMP NEXT_CHAR  
+
+DONE:
+    MOV [4000H], CL 
+    HLT

@@ -1,0 +1,20 @@
+MOV AL, 5FH      
+MOV CL, 08H       
+MOV BL, 00H       
+
+COUNT_LOOP:
+    RCR AL, 1     
+    JNC SKIP      
+    INC BL        
+
+SKIP:
+    DEC CL
+    JNZ COUNT_LOOP
+
+MOV [4000H], BL   
+
+MOV AL, BL
+AND AL, 01H       
+MOV [4001H], AL   
+
+HLT

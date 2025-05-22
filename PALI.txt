@@ -1,0 +1,35 @@
+ORG 100H
+
+MOV SI, 3000H
+MOV [SI],'a'
+INC SI 
+MOV [SI],'a'
+INC SI
+MOV [SI],'a'
+INC SI
+MOV [SI],'a'
+INC SI
+MOV [SI],'a'
+
+MOV SI, 3000H
+MOV DI, 3004H
+MOV CX, 2
+
+AGAIN:
+    MOV AL, [SI]
+    MOV BL, [DI]
+    CMP AL, BL
+    JNE NOT_PALI
+    INC SI
+    DEC DI
+    LOOP AGAIN
+
+    MOV AL, 01H
+    JMP DONE
+
+NOT_PALI:
+    MOV AL, 00H
+
+DONE:
+    MOV [4000H], AL
+    HLT
