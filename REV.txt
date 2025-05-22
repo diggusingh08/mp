@@ -1,0 +1,37 @@
+MOV SI, 3000H
+MOV [SI], 's'
+
+INC SI 
+MOV [SI], 'u'
+
+INC SI
+MOV [SI], 's'
+
+INC SI
+MOV [SI], 'p'
+
+INC SI
+MOV [SI], 'e'
+
+
+MOV SI, 3000H      
+MOV DI, 3004H      
+MOV CX, 2         
+
+AGAIN:
+    MOV AL,[SI]
+    MOV BL,[DI]
+   
+    MOV DL,AL
+    MOV AL,BL
+    MOV BL,DL
+    MOV [SI],AL
+    MOV [DI],BL
+    
+    INC SI
+    DEC DI
+    LOOP AGAIN
+    MOV AL,[3001H]
+    MOV BL,[3004H]
+    
+    HLT
